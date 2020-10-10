@@ -15,3 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'MainController@index');
 Route::get('/daily', 'DailyController@index')->name('daily');
+Route::get('/schedule', 'DayliScheduleController@index')->name('schedule');
+Route::get('/deleted', 'DeletedController@index')->name('deleted');
+Route::get('/daily/{id}', 'DailyController@show')->name('show');
+Route::get('/players', 'PlayersController@index')->name('players');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class MainController extends Controller
+class PlayersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,23 +13,18 @@ class MainController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $get_live = Http::get('https://api.sportradar.us/soccer-t3/eu/us/schedules/live/results.json?api_key=sykat9kajte34jnwszsqxw58')->json();
-        // dump($get_live);
+    {
+        $missing = Http::get('https://api.sportradar.us/soccer-t3/eu/us/tournaments/sr:season:77361/missing_players.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+
+        $mapping = Http::get('https://api.sportradar.us/soccer-t3/eu/us/players/v2_v3_id_mappings.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+
+        $merge = Http::get('https://api.sportradar.us/soccer-t3/eu/us/players/merge_mappings.json?api_key=sykat9kajte34jnwszsqxw58')->json();
 
 
-        if(!empty($get_live['results'])){
-            $live = $get_live['results'];
-            dump($live);
 
-            return view('start', [
-                'live' => $live
-            ]);
-        }else{
-            return view('start', [
-                'live' => ''
-            ]);
-        }   
+        dump($merge);
+
+        return view('players');
     }
 
     /**

@@ -14,8 +14,10 @@ class DailyController extends Controller
      */
     public function index()
     {
-        $daily_res = Http::get('https://api.sportradar.us/soccer-t3/eu/us/schedules/2020-10-04/results.json?api_key=sykat9kajte34jnwszsqxw58')->json()['results'];
-        dump($daily_res);
+        $daily_res = Http::get('https://api.sportradar.us/soccer-t3/eu/us/schedules/2020-10-10/results.json?api_key=sykat9kajte34jnwszsqxw58')->json()['results'];
+        // dump($daily_res);
+
+        
 
         return view('daily', [
             'daily_res' => $daily_res
@@ -51,7 +53,25 @@ class DailyController extends Controller
      */
     public function show($id)
     {
-        //
+
+        if(!empty($_GET['daily_match_id'])){
+            $daily_match_id = $_GET['daily_match_id'];
+        }
+
+        $match_lineups = Http::get('https://api.sportradar.us/soccer-t3/eu/us/matches/'. $daily_match_id .'/lineups.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+
+        $match_probabilities = Http::get('https://api.sportradar.us/soccer-t3/eu/us/matches/'. $daily_match_id .'/probabilities.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+
+        $match_summary = Http::get('https://api.sportradar.us/soccer-t3/eu/us/matches/'. $daily_match_id .'/summary.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+
+        $match_timeline = Http::get('https://api.sportradar.us/soccer-t3/eu/us/matches/'. $daily_match_id .'/timeline.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+
+
+        dump($match_timeline);
+
+        return view('show', [
+            'match' => $match_lineups
+        ]);
     }
 
     /**

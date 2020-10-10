@@ -1,24 +1,36 @@
 @extends('welcome')
 @section('content')
 @if(!empty($live))
-    @foreach($live as $match)
-        <div style="border-bottom: 1px solid red">
-            <h1>Event</h1>
-            <div>Time: {{$match['sport_event']['scheduled']}}</div> <br>
-            <div>Type: {{$match['sport_event']['tournament_round']['type']}} {{$match['sport_event']['tournament_round']['number']}} {{$match['sport_event']['tournament_round']['phase']}}</div>
-        <h1>Season: {{$match['sport_event']['season']['name']}}</h1>
-            <div>start: {{$match['sport_event']['season']['start_date']}}   end: {{$match['sport_event']['season']['end_date']}} {{$match['sport_event']['season']['year']}}</div>
-        <h1>Teams</h1>
-            <h3>{{$match['sport_event']['competitors'][0]['name']}}  VS   {{$match['sport_event']['competitors'][1]['name']}}</h3>
-            <h3>{{$match['sport_event']['competitors'][0]['qualifier']}}  VS   {{$match['sport_event']['competitors'][1]['qualifier']}}</h3>
-        <h1>Score</h1>
-            <h3>
-                match status:  {{$match['sport_event_status']['match_status']}}
-                @if(!empty($match['sport_event_status']['home_score']))
-                    {{$match['sport_event_status']['home_score']}}  VS   {{$match['sport_event_status']['away_score']}}</h3>
+    @foreach($live as $result)
+    <div class="border-b">
+        <h2 class="flex bg-black text-white p-2 justify-between">
+            {{$result['sport_event']['tournament']['category']['name']}} : {{$result['sport_event']['season']['name']}}
+            <span>
+                {{$result['sport_event_status']['match_status']}}
+            </span>
+            <span>
+                {{$result['sport_event']['scheduled']}}
+            </span>
+        </h2>
+        
+        <div class="flex justify-between p-3">
+
+            <div>
+                {{$result['sport_event']['competitors'][0]['name']}}
+            </div>
+            <div>
+                @if($result['sport_event_status']['match_status'] == 'ended')
+                    {{$result['sport_event_status']['home_score']}} - 
+                    {{$result['sport_event_status']['away_score']}}
                 @endif
                 
+            </div>
+            <div>
+                {{$result['sport_event']['competitors'][1]['name']}}
+            </div>    
+             
         </div>
+    </div>
 @endforeach
 @else
     <div>no results</div>
