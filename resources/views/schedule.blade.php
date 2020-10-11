@@ -18,8 +18,20 @@
             </form>
 
         <div class="flex p-2 justify-between">
-            <div>{{$result['competitors'][0]['name']}}</div>
-            <div>{{$result['competitors'][1]['name']}}</div>
+            <div>
+                <form action="{{ route('team', $result['competitors'][0]['id']) }}" method="get">
+                    <input type="hidden" name="team_id" value="{{$result['competitors'][0]['id']}}">
+                    <button type="submit">{{$result['competitors'][0]['name']}}</button>
+                </form>
+            </div>
+
+            <div>
+                <form action="{{ route('team', $result['competitors'][1]['id']) }}" method="get">
+                    <input type="hidden" name="team_id" value="{{$result['competitors'][1]['id']}}">
+                    <button type="submit">{{$result['competitors'][1]['name']}}</button>
+                </form>
+            </div>
+
         </div>
     </div>
 @endforeach

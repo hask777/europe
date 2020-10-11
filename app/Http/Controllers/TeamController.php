@@ -17,8 +17,20 @@ class TeamController extends Controller
         if(!empty($_GET['team_id'])){
             $team_id = $_GET['team_id'];
         }
+        // Team Profile
+        $team = Http::get('https://api.sportradar.us/soccer-t3/eu/ru/teams/'. $team_id . '/profile.json?api_key=sykat9kajte34jnwszsqxw58')->json();
 
-        $team = Http::get('https://api.sportradar.us/soccer-t3/eu/us/teams/'. $team_id . '/profile.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+        // Team results
+
+        $team_results = Http::get('https://api.sportradar.us/soccer-t3/eu/us/teams/'. $team_id . '/results.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+
+        // Team Schedule
+
+        $team_schedule = Http::get('https://api.sportradar.us/soccer-t3/eu/us/teams/'. $team_id . '/schedule.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+
+        // Team Statistics
+
+        $team_statistics = Http::get('https://api.sportradar.us/soccer-t3/eu/us/tournaments/sr:season:76517/teams/'. $team_id . '/statistics.json?api_key=sykat9kajte34jnwszsqxw58')->json();
 
         dump($team);
         return view('team', [
