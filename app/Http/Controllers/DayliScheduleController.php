@@ -19,7 +19,18 @@ class DayliScheduleController extends Controller
     }
 
     public function show($id){
-        
+
+        if(!empty($_GET['match_id'])){
+            $match_id = $_GET['match_id'];
+        }
+
+        $match = Http::get('https://api.sportradar.us/soccer-t3/eu/us/matches/'. $match_id .'/lineups.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+
+        dump($match);
+
+        return view('schedule.show', [
+            'match' => $match
+        ]);
     }
 
 }

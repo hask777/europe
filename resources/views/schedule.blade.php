@@ -4,7 +4,7 @@
     @foreach($daily_schedule as $result)
     <div class="border-b">
 
-            <form method="get" action="">
+            <form method="get" action="{{ route('schedule_show', $result['id']) }}">
                 <input type="hidden" name="match_id" value="{{$result['id']}}">
                 <button type="submit" class="flex bg-black text-white p-2 justify-between w-full">
                     {{$result['season']['name']}}

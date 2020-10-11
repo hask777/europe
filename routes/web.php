@@ -18,4 +18,6 @@ Route::get('/daily', 'DailyController@index')->name('daily');
 Route::get('/schedule', 'DayliScheduleController@index')->name('schedule');
 Route::get('/deleted', 'DeletedController@index')->name('deleted');
 Route::get('/daily/{id}', 'DailyController@show')->name('show');
-Route::get('/players', 'PlayersController@index')->name('players');
+Route::get('/players/{id}', 'PlayersController@index')->name('players');
+Route::get('/schedule/{id}', 'DayliScheduleController@show')->name('schedule_show');
+Route::get('/team/{id}', 'TeamController@index')->name('team');

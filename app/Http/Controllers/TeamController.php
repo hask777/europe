@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class DailyController extends Controller
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +14,15 @@ class DailyController extends Controller
      */
     public function index()
     {
-        $daily_res = Http::get('https://api.sportradar.us/soccer-t3/eu/us/schedules/2020-10-10/results.json?api_key=sykat9kajte34jnwszsqxw58')->json()['results'];
-        dump($daily_res);
+        if(!empty($_GET['team_id'])){
+            $team_id = $_GET['team_id'];
+        }
 
-        
+        $team = Http::get('https://api.sportradar.us/soccer-t3/eu/us/teams/'. $team_id . '/profile.json?api_key=sykat9kajte34jnwszsqxw58')->json();
 
-        return view('daily', [
-            'daily_res' => $daily_res
+        dump($team);
+        return view('team', [
+            'team' => $team
         ]);
     }
 
@@ -53,26 +55,7 @@ class DailyController extends Controller
      */
     public function show($id)
     {
-
-        if(!empty($_GET['daily_match_id'])){
-            $daily_match_id = $_GET['daily_match_id'];
-        }
-
-        $match_lineups = Http::get('https://api.sportradar.us/soccer-t3/eu/us/matches/'. $daily_match_id .'/lineups.json?api_key=sykat9kajte34jnwszsqxw58')->json();
-
-        $match_probabilities = Http::get('https://api.sportradar.us/soccer-t3/eu/us/matches/'. $daily_match_id .'/probabilities.json?api_key=sykat9kajte34jnwszsqxw58')->json();
-
-        $match_summary = Http::get('https://api.sportradar.us/soccer-t3/eu/us/matches/'. $daily_match_id .'/summary.json?api_key=sykat9kajte34jnwszsqxw58')->json();
-
-        $match_timeline = Http::get('https://api.sportradar.us/soccer-t3/eu/us/matches/'. $daily_match_id .'/timeline.json?api_key=sykat9kajte34jnwszsqxw58')->json();
-
-
-        dump($match_probabilities);
-
-        return view('show', [
-            'match' => $match_lineups,
-            'probabilities' => $match_probabilities
-        ]);
+        //
     }
 
     /**

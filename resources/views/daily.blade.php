@@ -19,7 +19,11 @@
             <div class="flex justify-between p-3">
 
                 <div>
-                    {{$result['sport_event']['competitors'][0]['name']}}
+                    <form action="{{ route('team', $result['sport_event']['competitors'][0]['id']) }}" method="get">
+                        <input type="hidden" name="team_id" value="{{$result['sport_event']['competitors'][0]['id']}}">
+                        <button type="submit">{{$result['sport_event']['competitors'][0]['name']}}</button>
+                    </form>
+                    
                 </div>
                 <div>
                     @if($result['sport_event_status']['match_status'] == 'ended')

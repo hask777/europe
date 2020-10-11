@@ -14,15 +14,21 @@ class PlayersController extends Controller
      */
     public function index()
     {
-        $missing = Http::get('https://api.sportradar.us/soccer-t3/eu/us/tournaments/sr:season:77361/missing_players.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+        // $missing = Http::get('https://api.sportradar.us/soccer-t3/eu/us/tournaments/sr:season:77361/missing_players.json?api_key=sykat9kajte34jnwszsqxw58')->json();
 
-        $mapping = Http::get('https://api.sportradar.us/soccer-t3/eu/us/players/v2_v3_id_mappings.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+        // $mapping = Http::get('https://api.sportradar.us/soccer-t3/eu/us/players/v2_v3_id_mappings.json?api_key=sykat9kajte34jnwszsqxw58')->json();
 
-        $merge = Http::get('https://api.sportradar.us/soccer-t3/eu/us/players/merge_mappings.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+        // $merge = Http::get('https://api.sportradar.us/soccer-t3/eu/us/players/merge_mappings.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+
+        if(!empty($_GET['player_daily'])){
+            $player_id = $_GET['player_daily'];
+        }
+
+        $player = Http::get('https://api.sportradar.us/soccer-t3/eu/us/players/'.$player_id.'/profile.json?api_key=sykat9kajte34jnwszsqxw58')->json();
 
 
 
-        dump($merge);
+        dump($player);
 
         return view('players');
     }
