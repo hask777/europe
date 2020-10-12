@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 class DeletedController extends Controller
 {
     public function index(){
-        $deleted = Http::get('https://api.sportradar.us/soccer-t3/eu/us/schedules/deleted_matches.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+        $deleted = Http::get('https://api.sportradar.us/soccer-t3/eu/us/schedules/deleted_matches.json?api_key=t6vyac2agx5a76nzpp7a8rh7')->json();
 
         dump($deleted);
 

@@ -19,7 +19,7 @@ class PlayerController extends Controller
 
         $player_id = $id;
 
-        $player = Http::get('https://api.sportradar.us/soccer-t3/eu/us/players/'.$player_id.'/profile.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+        $player = Http::get('https://api.sportradar.us/soccer-t3/eu/us/players/'.$player_id.'/profile.json?api_key=t6vyac2agx5a76nzpp7a8rh7')->json();
 
         dump($player);
 
