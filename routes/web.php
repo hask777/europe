@@ -21,3 +21,4 @@ Route::get('/daily/{id}', 'DailyController@show')->name('show');
 Route::get('/players/{id}', 'PlayersController@index')->name('players');
 Route::get('/schedule/{id}', 'DayliScheduleController@show')->name('schedule_show');
 Route::get('/team/{id}', 'TeamController@index')->name('team');
+Route::get('/tournament', 'TournamentCountroller@index')->name('tournament');

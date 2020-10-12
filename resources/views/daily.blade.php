@@ -1,6 +1,6 @@
 @extends('welcome')
 @section('content')
-
+@if(!empty($daily_res))
     @foreach($daily_res as $result)
         <div class="border-b">
         <form method="get" action="{{ route('show', $result['sport_event']['id']) }}">
@@ -39,5 +39,5 @@
             </div>
         </div>
     @endforeach
-
+@endif
 @endsection

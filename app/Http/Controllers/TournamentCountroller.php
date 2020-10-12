@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class MainController extends Controller
+class TournamentCountroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,23 +13,18 @@ class MainController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $get_live = Http::get('https://api.sportradar.us/soccer-t3/eu/us/schedules/live/results.json?api_key=t6vyac2agx5a76nzpp7a8rh7')->json();
-        // dump($get_live);
+    {
+        $list = Http::get('https://api.sportradar.us/soccer-t3/eu/us/schedules/2020-10-10/results.json?api_key=t6vyac2agx5a76nzpp7a8rh7')->json();
 
+        $live = Http::get('https://api.sportradar.us/soccer-t3/eu/us/schedules/2020-10-10/results.json?api_key=t6vyac2agx5a76nzpp7a8rh7')->json();
 
-        if(!empty($get_live['results'])){
-            $live = $get_live['results'];
-            dump($live);
+        
 
-            return view('start', [
-                'live' => $live
-            ]);
-        }else{
-            return view('start', [
-                'live' => ''
-            ]);
-        }   
+        $push = Http::get('http://api.sportradar.us/soccer-t3/eu/stream/statistics/subscribe?api_key=t6vyac2agx5a76nzpp7a8rh7')->json();
+
+        dump($push);
+
+        return view('tournament');
     }
 
     /**
