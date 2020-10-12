@@ -21,3 +21,5 @@ Route::get('/daily/{id}', 'DailyController@show')->name('show');
 Route::get('/players/{id}', 'PlayersController@index')->name('players');
 Route::get('/schedule/{id}', 'DayliScheduleController@show')->name('schedule_show');
 Route::get('/team/{id}', 'TeamController@index')->name('team');
+Route::get('/player/{id}', 'PlayerController@index')->name('player');
+Route::get('/season/{season_id}/{team_id}', 'SeasonController@index')->name('season');

@@ -1,4 +1,6 @@
 @extends('welcome')
 @section('content')
-pl
+	<div>
+		{{$player['player']['name']}}
+	</div>
 @endsection

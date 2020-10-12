@@ -5,32 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class PlayersController extends Controller
+class PlayerController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        // $missing = Http::get('https://api.sportradar.us/soccer-t3/eu/us/tournaments/sr:season:77361/missing_players.json?api_key=sykat9kajte34jnwszsqxw58')->json();
 
-        // $mapping = Http::get('https://api.sportradar.us/soccer-t3/eu/us/players/v2_v3_id_mappings.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+        
 
-        // $merge = Http::get('https://api.sportradar.us/soccer-t3/eu/us/players/merge_mappings.json?api_key=sykat9kajte34jnwszsqxw58')->json();
-
-        if(!empty($_GET['player_daily'])){
-            $player_id = $_GET['player_daily'];
-        }
+        $player_id = $id;
 
         $player = Http::get('https://api.sportradar.us/soccer-t3/eu/us/players/'.$player_id.'/profile.json?api_key=sykat9kajte34jnwszsqxw58')->json();
 
-
-
         dump($player);
 
-        return view('players');
+        return view('player', [
+            'player' => $player
+        ]);
     }
 
     /**
@@ -51,7 +46,7 @@ class PlayersController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //
     }
 
     /**

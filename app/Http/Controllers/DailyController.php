@@ -14,14 +14,26 @@ class DailyController extends Controller
      */
     public function index()
     {
-        $daily_res = Http::get('https://api.sportradar.us/soccer-t3/eu/us/schedules/2020-10-10/results.json?api_key=sykat9kajte34jnwszsqxw58')->json()['results'];
+        $daily_res = Http::get('https://api.sportradar.us/soccer-t3/eu/us/schedules/2020-10-10/results.json?api_key=sykat9kajte34jnwszsqxw58')->json();
+
         dump($daily_res);
 
-        
+        if(!empty($daily_res['results'])){
 
-        return view('daily', [
-            'daily_res' => $daily_res
-        ]);
+            $daily_res = $daily_res['results'];
+             
+            return view('daily', [
+                'daily_res' => $daily_res
+            ]);
+
+        }else{
+
+            return view('daily', [
+                'daily_res' => ''
+            ]);
+        }
+
+        
     }
 
     /**
